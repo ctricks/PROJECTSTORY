@@ -132,6 +132,7 @@
                                                 <th scope="col">id</th>
                                                 <th scope="col">Vendor</th>
                                                 <th scope="col">Store</th>
+                                                <th scope="col">Order Placed</th>
                                                 <th scope="col">SO NO</th>
                                                 <th scope="col">SO Date</th>
                                                 <th scope="col">SO Total Item</th>                                                
@@ -146,6 +147,7 @@
                                                 <td>{{ $detail->Id }}</td>
                                                 <td>{{ $detail->Warehouse }}</td>
                                                 <td>{{ $detail->StoreName }}</td>
+                                                <td>{{ $detail->OrderDate }}</td>
                                                 <td>{{ $detail->SONumber }}</td>
                                                 <td>{{ $detail->SalesOrderDate }}</td>                                                
                                                 <td>{{ $detail->Total_Item }}</td>
