@@ -1,0 +1,24 @@
+/*
+Table Of Contents
+=========================
+- Default Typography
+- Custom Typography
+=========================
+*/
+
+
+/*
+--------------------------
+- Default customize
+--------------------------
+*/
+
+.wider-select {
+    width: 500px; /* Adjust the desired width here */
+}
+
+@media (min-width: 768px) {
+    .wider-select {
+        width: 300px; /* Adjust the width for larger screens */
+    }
+}
