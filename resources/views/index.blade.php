@@ -891,26 +891,32 @@ $('#dataTable_SOdetails').on('click', '#btn-delSODetails', function() {
         
     });
 </script>
-<!-- <script>
+<script>
   $(document).ready(function() {
-    $("#BranchId-select").change(function() {
-      var selectedBranchId = $(this).val();
-alert(selectedBranchId);
+    $("#SupplierId").change(function() {
+      var selectedSupplierId = $(this).val();
       $.ajax({
-        url: "/get-sonumber/" + selectedBranchId,
+        url: "/get-days/" + selectedSupplierId,
         method: "GET",
         dataType: "json",
         success: function(response) {
-          var soNumber = response.soNumber;
-          $("#SONumber").val(soNumber);
+            if(response.length > 0)
+            {                
+                document.getElementById("SODate").setAttribute("min", response[0]['MINDATE'].substring(0,10));
+                document.getElementById("SODate").setAttribute("max", response[0]['MAXDATE'].substring(0,10));             
+            }else
+            {
+                document.getElementById("SODate").setAttribute("min", '1901-01-01');
+                document.getElementById("SODate").setAttribute("max", '2099-12-31');             
+            }
         },
         error: function(error) {
-          console.error("Error fetching soNumber:", error);
+          console.error("Error fetching Dates:", error);
         }
       });
     });
   });
-</script> -->
+</script>
 <script>
 $(document).ready(function() {
     $('.alert').delay(4000).fadeOut('slow');

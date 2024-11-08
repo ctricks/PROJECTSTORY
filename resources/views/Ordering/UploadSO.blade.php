@@ -51,12 +51,12 @@
                                                          </select>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="form-group row">
+                                                {{-- <div class="form-group row">
                                                     <label for="totItem-input" class="col-4 col-form-label">SO No.</label>
                                                     <div class="col-8">
                                                         <input class="form-control" type="text" id="SONumber" name ="SONumber" readonly/>
                                                     </div>
-                                                </div> -->
+                                                </div> --}}
                                                 <div class="form-group row">
                                                     <label class="col-4 col-form-label">Vendor</label>
                                                     <div class="col-8">
@@ -72,7 +72,7 @@
                                                 <div class="form-group row">
                                                     <label for="totItem-input" class="col-4 col-form-label">SO Date</label>
                                                     <div class="col-8">
-                                                        <input class="form-control" type="date" value="<?php echo date('Y-m-d'); ?>" id="SODate" name ="SODate" />
+                                                        <input class="form-control" type="date" value="<?php echo date('Y-m-d'); ?>" id="SODate" name ="SODate" min="1900-01-01" max="2099-09-13" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -175,6 +175,7 @@
         <!-- main content area end -->
 <script type="text/javascript">
     const branchSelect = document.getElementById('BranchId');
+    const supplierSelect = document.getElementById('SupplierId');
     let SONumberInput = document.getElementById('SONumber');
 
     branchSelect.addEventListener('change', () => {
@@ -195,6 +196,24 @@
     });
     });
 
+    supplierSelect.addEventListener('change', () => {
+    const selectedsupplier = branchSelect.value;
+    
+alert('test');
+
+    fetch(`/get-days/${selectedsupplier}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data && data.length > 0) {
+            console.log(data);
+        } else {
+            console.error('Error: No data received or invalid data format');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching So number:', error);
+    });
+    });
    
        
 </script>

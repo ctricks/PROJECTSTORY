@@ -40,7 +40,7 @@ class UPOrderingController extends Controller
         ->get(); 
 
         $data = DB::select("CALL SP_CHECK_SO_ONLOAD(?, ?)", [$branchId,$ascending]); 
-
+        
         return view('Ordering.UploadSO',compact('data','branch','supplier'));
         // return response()->json($data);
     }

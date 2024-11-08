@@ -244,6 +244,14 @@ class OrderingController extends Controller
         return response()->json($data);
 
     }
+    public function showDays($supplierId)
+    {
+        
+        $data = DB::select("CALL SP_GET_ALLOWED_SO_MAXDATES(?)", [$supplierId]); 
+        return response()->json($data);
+
+    }
+
     public function showWOS($id,$isType)
     {        
         if($isType == 1) //NO SO

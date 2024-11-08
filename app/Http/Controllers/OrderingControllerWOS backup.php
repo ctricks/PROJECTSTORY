@@ -16,7 +16,7 @@ class OrderingControllerWOS extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() retain
+    public function index()
     {
         $ascending = 0; // Default to ascending order
         $branchId =  0;//auth()->user()->branchid;

@@ -74,6 +74,7 @@ Route::post('/store-branch', [ReferenceController::class, 'branchstore']);
 //ORDERING
 Route::get('/createSO',[OrderingController::class,'index']);
 Route::get('/get-sonumber/{id}', [OrderingController::class, 'show']);
+Route::get('/get-days/{id}', [OrderingController::class, 'showDays']);
 Route::post('/store-so', [OrderingController::class, 'store']);
 Route::post('/store-so-upload', [OrderingController::class, 'storeUpload']);
 Route::get('/createSO-list/{SONumber}', [OrderingController::class, 'create'])->name('createSO-list');
