@@ -70,6 +70,8 @@
                                     <!-- <li><a href="/createSO">Store Order</a></li> -->
                                     <li><a href="/uploadingSO">Create Store Order</a></li>
                                     <li><a href="/createSOWOS">Store Order (W/O SO)</a></li>
+                                    <li><a href="/SOApproval">Approval</a></li>
+                                    <li><a href="/SOApproved">Approved List</a></li>
                                    <!-- <li><a href="/createSODS">DROPSHIPPING</a></li>  -->
                                 </ul>
                             </li>
@@ -267,6 +269,25 @@ let so_dTable = new DataTable('#so_dTable',
         { mDataProp: 'Status' },
         { mDataProp: null, render: function(data, type, row) {
             return '<a href="/createSO-list/' + row.SONumber + '" class="btn btn-rounded btn-info mb-3"><i class="fa fa-folder-open"></i></a>';
+        
+        } }
+    ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ]          
+});
+
+let soApp_dTable = new DataTable('#soApp_dTable', 
+    {
+    columns: [
+        { mDataProp: 'OrderDate' },
+        { mDataProp: 'SODate' },
+        { mDataProp: 'SONumber' },
+        { mDataProp: 'TOTAL_ITEM' },
+        { mDataProp: 'TotalQuantity' },
+        { mDataProp: 'CreatedBy' },
+        { mDataProp: 'Vendor' },
+        { mDataProp: 'Branch' },
+        { mDataProp: 'STATUS' },
+        { mDataProp: null, render: function(data, type, row) {
+            return '<a href="/createSOApp-list/' + row.SONumber + '" class="btn btn-rounded btn-info mb-3"><i class="fa fa-folder-open"></i></a>';
         
         } }
     ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ]          

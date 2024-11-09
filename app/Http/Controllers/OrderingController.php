@@ -63,6 +63,31 @@ class OrderingController extends Controller
         return view('Ordering.SOItemList',compact('productList','details','SONumber','SOHeader'));
 
     }
+
+    public function createApproval($SONumber)
+    {
+        $ascending = "1"; // Default to ascending order
+        $details = DB::select("CALL SP_GET_RECEIVINGITEMS_HEADERID(?,?)", [$SONumber,$ascending]); 
+
+        $all = "0"; 
+        $ItemCode = ""; 
+        $ByDesc ="";
+        // $dataInv = DB::select("CALL SP_GET_ITEMINVENTORY_BRANCH(?,?,?,?)", [$branchId,$all,$ItemCode,$ByDesc]); 
+
+        $productList = DB::table('productmasterfile')
+        ->select('*')
+        ->get(); 
+
+        // $paramId = $id;
+        $SONumber = $SONumber;
+        // $Status = $Status;
+        $SOHeader = DB::select("CALL SP_GET_SO_TRANSACTIONHEADER(?)",[$SONumber]);
+        
+
+        return view('Ordering.SOItemListApproval',compact('productList','details','SONumber','SOHeader'));
+
+    }
+
     public function createDuplicate($SONumber)
     {
         
@@ -108,6 +133,55 @@ class OrderingController extends Controller
         // return view('Ordering.SOItemList',compact('productList','details','SONumber','SOHeader'));
 
     }
+
+    public function ApprovedSO($SONumber)
+    {        
+        //dd($SONumber);
+        //$SOHeader = DB::select("CALL SP_SO_DUPLICATE(?, ?)",[$SONumber,1]);
+
+        DB::select("CALL SP_SO_FOR_APPROVAL(?,?,?)",[$SONumber,auth()->user()->id,1]);
+
+        $ascending = "1"; // Default to ascending order
+        $branchId = "1";//auth()->user()->branchid; // 
+        $details = DB::select("CALL SP_GET_RECEIVINGITEMS_HEADERID(?,?)", [$SONumber,$ascending]); 
+
+        
+        $productList = DB::table('productmasterfile')
+        ->select('*')
+        ->get(); 
+
+        
+        $SOHeader = DB::select("CALL SP_GET_SO_TRANSACTIONHEADER(?)",[$SONumber]);
+        $Status = "SO Approved";
+        
+        $ascending = 0; // Default to ascending order
+        $branchId =  0;//auth()->user()->branchid;
+       
+        $email = auth()->user()->email;
+        $SiteByUser = auth()->user()->branchid;
+
+        $branch = DB::select("CALL SP_GET_SITE_PER_EMAIL(?)", [$email]); 
+
+        if(count($branch) == 0)
+        {
+            $branch = DB::table('branch')
+            ->select('*')
+            ->where('id',[$SiteByUser])
+            ->get();             
+        }
+
+        $supplier = DB::table('vendormasterfile')
+        ->select('*')
+        //->where('Status',1)
+        ->get(); 
+
+        $data = DB::select("CALL SP_GET_LIST_SOAPPROVAL(-1)"); 
+
+        return view('Ordering.SOApproval',compact('data','branch','supplier'));
+                
+    }
+
+    
 
     public function storeUpload(Request $request)
     {

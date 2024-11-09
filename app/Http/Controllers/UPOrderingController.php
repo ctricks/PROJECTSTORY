@@ -44,9 +44,76 @@ class UPOrderingController extends Controller
         return view('Ordering.UploadSO',compact('data','branch','supplier'));
         // return response()->json($data);
     }
+
+    public function SOApproval()
+    {
+        $ascending = 0; // Default to ascending order
+        $branchId =  0;//auth()->user()->branchid;
+       
+        $email = auth()->user()->email;
+        $SiteByUser = auth()->user()->branchid;
+
+        $branch = DB::select("CALL SP_GET_SITE_PER_EMAIL(?)", [$email]); 
+
+        if(count($branch) == 0)
+        {
+            $branch = DB::table('branch')
+            ->select('*')
+            ->where('id',[$SiteByUser])
+            ->get();             
+        }
+
+        $supplier = DB::table('vendormasterfile')
+        ->select('*')
+        //->where('Status',1)
+        ->get(); 
+
+        $data = DB::select("CALL SP_GET_LIST_SOAPPROVAL(-1)"); 
+        $DataType = 'Approval';
+        
+        return view('Ordering.SOApproval',compact('data','branch','supplier','DataType'));
+    }
+
+    public function SOApproved()
+    {
+        $ascending = 0; // Default to ascending order
+        $branchId =  0;//auth()->user()->branchid;
+       
+        $email = auth()->user()->email;
+        $SiteByUser = auth()->user()->branchid;
+
+        $branch = DB::select("CALL SP_GET_SITE_PER_EMAIL(?)", [$email]); 
+
+        if(count($branch) == 0)
+        {
+            $branch = DB::table('branch')
+            ->select('*')
+            ->where('id',[$SiteByUser])
+            ->get();             
+        }
+
+        $supplier = DB::table('vendormasterfile')
+        ->select('*')
+        //->where('Status',1)
+        ->get(); 
+
+        $data = DB::select("CALL SP_GET_LIST_SOAPPROVAL(1)"); 
+        $DataType = 'Approved';
+        
+        return view('Ordering.SOApproval',compact('data','branch','supplier','DataType'));
+    }
+
+
     public function import(Request $request)
     {
+        
         $data = $request->all();
+
+        if($data['BranchId'] == null)
+        {
+            return redirect()->back()->with('error' , 'An error occurred while saving the data. Please try again.');
+        }
+
 
         $TransactionType = "SO";
         $orderDate = now();

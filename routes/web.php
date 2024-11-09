@@ -129,13 +129,22 @@ Route::post('/upload-StoreRec', [UPReceivingController::class, 'storeUploadItem'
 Route::get('/uploadRec-list/{$SONumber}',[UPReceivingController::class,'uploadList']);
 
 
-//APPROVAL
+//APPROVAL(SO)
+Route::get('/SOApproval',[UPOrderingController::class,'SOApproval']);
+Route::get('/createSOApp-list/{SONumber}', [OrderingController::class, 'createApproval']);
+Route::get('/ForApproveSO/{SONumber}', [OrderingController::class, 'ApprovedSO']);
+
+//APPROVED(SO)
+Route::get('/SOApproved',[UPOrderingController::class,'SOApproved']);
+
+
+//APPROVAL (RECEIVING)
 Route::get('approvalSO',[RecApprovalController::class,'index']);
 Route::get('/approval-list/{id}/{SONumber}', [RecApprovalController::class, 'approval']);
 Route::put('/update-status-rec', [RecApprovalController::class, 'update'])->name('update-status');
 Route::post('/approved-SO', [RecApprovalController::class, 'approvedSO']);
 
-//APPROVED
+//APPROVED (RECEIVING)
 Route::get('approvedSO',[RecApprovalController::class,'approved']);
 Route::get('/approved-list/{SONumber}', [RecApprovalController::class, 'approved_LIST']);
 
