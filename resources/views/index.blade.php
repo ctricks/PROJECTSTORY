@@ -68,10 +68,10 @@
                                     </span></a>
                                 <ul class="collapse">
                                     <!-- <li><a href="/createSO">Store Order</a></li> -->
-                                    <li><a href="/uploadingSO">Create Store Order</a></li>
+                                    <li><a href="/uploadingSO">Store Order</a></li>
                                     <li><a href="/createSOWOS">Store Order (W/O SO)</a></li>
                                     <li><a href="/SOApproval">Approval</a></li>
-                                    <li><a href="/SOApproved">Approved List</a></li>
+                                    {{-- <li><a href="/SOApproved">Approved List</a></li> --}}
                                    <!-- <li><a href="/createSODS">DROPSHIPPING</a></li>  -->
                                 </ul>
                             </li>
@@ -290,7 +290,8 @@ let soApp_dTable = new DataTable('#soApp_dTable',
             return '<a href="/createSOApp-list/' + row.SONumber + '" class="btn btn-rounded btn-info mb-3"><i class="fa fa-folder-open"></i></a>';
         
         } }
-    ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ]          
+    ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ],
+    order: [[0, 'desc']]
 });
 
 let dataTable_SOdetails = new DataTable('#dataTable_SOdetails', 

@@ -120,7 +120,7 @@ class UPOrderingController extends Controller
         $receivingDate = now();
         $totalItem = 0;
         $totalqty = 0;
-        $SupplierId = $data['SupplierId'];
+        $SupplierId = 1;//$data['SupplierId'];
         $BranchId = $data['BranchId'];
         $SODate = $data['SODate'];
         $formattedOrderDate = date('Y-m-d H:i:s', strtotime($orderDate));

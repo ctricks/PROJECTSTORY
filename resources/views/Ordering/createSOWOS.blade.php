@@ -6,9 +6,9 @@
                     <div class="row align-items-center">
                         <div class="col-sm-6">
                             <div class="breadcrumbs-area clearfix">
-                                <h4 class="page-title pull-left">SO</h4>
+                                <h4 class="page-title pull-left">Store Order (Without SO Number)</h4>
                                 <ul class="breadcrumbs pull-left">
-                                    <li><a href="/createSOWOS">Ordering with S.O. Number</a></li>11
+                                    <li><a href="/createSOWOS">Ordering without S.O. Number</a></li>
                                 </ul>
                             </div>
                         </div>

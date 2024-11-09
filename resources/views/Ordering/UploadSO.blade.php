@@ -6,7 +6,7 @@
                     <div class="row align-items-center">
                         <div class="col-sm-6">
                             <div class="breadcrumbs-area clearfix">
-                                <h4 class="page-title pull-left">Upload</h4>
+                                <h4 class="page-title pull-left">Store Order</h4>
                                 <ul class="breadcrumbs pull-left">
                                     <li><a href="">Ordering</a></li>
                                 </ul>
@@ -57,7 +57,7 @@
                                                         <input class="form-control" type="text" id="SONumber" name ="SONumber" readonly/>
                                                     </div>
                                                 </div> --}}
-                                                <div class="form-group row">
+                                                {{-- <div class="form-group row">
                                                     <label class="col-4 col-form-label">Vendor</label>
                                                     <div class="col-8">
                                                         <select class="js-example-basic-supplier form-control-sm input-rounded responsive col-md-12 wider-select" id="SupplierId" name="SupplierId">
@@ -68,7 +68,7 @@
                                                             @endforelse 
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-group row">
                                                     <label for="totItem-input" class="col-4 col-form-label">SO Date</label>
                                                     <div class="col-8">
