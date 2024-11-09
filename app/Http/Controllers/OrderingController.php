@@ -176,12 +176,60 @@ class OrderingController extends Controller
         ->get(); 
 
         $data = DB::select("CALL SP_GET_LIST_SOAPPROVAL(-1)"); 
+        $DataType = 'Approval';
 
-        return view('Ordering.SOApproval',compact('data','branch','supplier'));
+        return view('Ordering.SOApproval',compact('data','branch','supplier','DataType'));
                 
     }
 
-    
+    public function DisapprovedSO($SONumber)
+    {        
+        //dd($SONumber);
+        //$SOHeader = DB::select("CALL SP_SO_DUPLICATE(?, ?)",[$SONumber,1]);
+
+        DB::select("CALL SP_SO_FOR_APPROVAL(?,?,?)",[$SONumber,auth()->user()->id,-99]);
+
+        $ascending = "1"; // Default to ascending order
+        $branchId = "1";//auth()->user()->branchid; // 
+        $details = DB::select("CALL SP_GET_RECEIVINGITEMS_HEADERID(?,?)", [$SONumber,$ascending]); 
+
+        
+        $productList = DB::table('productmasterfile')
+        ->select('*')
+        ->get(); 
+
+        
+        $SOHeader = DB::select("CALL SP_GET_SO_TRANSACTIONHEADER(?)",[$SONumber]);
+        $Status = "SO Approved";
+        
+        $ascending = 0; // Default to ascending order
+        $branchId =  0;//auth()->user()->branchid;
+       
+        $email = auth()->user()->email;
+        $SiteByUser = auth()->user()->branchid;
+
+        $branch = DB::select("CALL SP_GET_SITE_PER_EMAIL(?)", [$email]); 
+
+        if(count($branch) == 0)
+        {
+            $branch = DB::table('branch')
+            ->select('*')
+            ->where('id',[$SiteByUser])
+            ->get();             
+        }
+
+        $supplier = DB::table('vendormasterfile')
+        ->select('*')
+        //->where('Status',1)
+        ->get(); 
+
+        $data = DB::select("CALL SP_GET_LIST_SOAPPROVAL(-1)"); 
+        $DataType = 'Approval';
+
+        return view('Ordering.SOApproval',compact('data','branch','supplier','DataType'));
+                
+    }
+
 
     public function storeUpload(Request $request)
     {

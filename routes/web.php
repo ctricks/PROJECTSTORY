@@ -133,6 +133,7 @@ Route::get('/uploadRec-list/{$SONumber}',[UPReceivingController::class,'uploadLi
 Route::get('/SOApproval',[UPOrderingController::class,'SOApproval']);
 Route::get('/createSOApp-list/{SONumber}', [OrderingController::class, 'createApproval']);
 Route::get('/ForApproveSO/{SONumber}', [OrderingController::class, 'ApprovedSO']);
+Route::get('/ForDisapproveSO/{SONumber}', [OrderingController::class, 'DisapprovedSO']);
 
 //APPROVED(SO)
 Route::get('/SOApproved',[UPOrderingController::class,'SOApproved']);

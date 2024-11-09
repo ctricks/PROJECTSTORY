@@ -103,15 +103,18 @@
                                 <label class="col-form-label">SO Number: </label>
                                 
                                 <span style="font-weight: bold; color: red;"> {{$SONumber}} 
-                                @if( $SOHeader[0]->STATUS == "PENDING")
-                                <button type="button" id="headerEditBtn" class="btn btn-rounded btn-info mb-3 HeaderEdit-button"  data-toggle="modal" data-target=".bd-example-modal-headerEdit"  data-id="{{ $SOHeader[0]->SODate }}" data-id2="{{ $SOHeader[0]->PO_QTY }}" title="Edit Header"><i class="fa fa-edit"></i></button>
-                                @endif
-                                @if( $SOHeader[0]->STATUS == "RECEIVED" || $SOHeader[0]->STATUS == "PENDING")
-                                <a href="/duplicateSO-list/{{ $SONumber}}" class="btn btn-rounded btn-info mb-3" title="Duplicate Header & Details"><i class="fa fa-copy"></i></a>                                
-                                @endif
-                                @if( $SOHeader[0]->SOApproved = -1)
-                                <a href="/ForApproveSO/{{ $SONumber}}" class="btn btn-rounded btn-info mb-3" title="Approve SO Creation"><i class="fa fa-check"></i></a>
-                                @endif
+                                <div>
+                                    @if( $SOHeader[0]->STATUS == "PENDING")
+                                    <button type="button" id="headerEditBtn" class="btn btn-rounded btn-info mb-3 HeaderEdit-button"  data-toggle="modal" data-target=".bd-example-modal-headerEdit"  data-id="{{ $SOHeader[0]->SODate }}" data-id2="{{ $SOHeader[0]->PO_QTY }}" title="Edit Header"><i class="fa fa-edit"></i></button>
+                                    @endif
+                                    @if( $SOHeader[0]->STATUS == "RECEIVED" || $SOHeader[0]->STATUS == "PENDING")
+                                    <a href="/duplicateSO-list/{{ $SONumber}}" class="btn btn-rounded btn-info mb-3" title="Duplicate Header & Details"><i class="fa fa-copy"></i></a>                                
+                                    @endif
+                                    @if( $SOHeader[0]->SOApproved = -1)
+                                    <a href="/ForApproveSO/{{ $SONumber}}" class="btn btn-rounded btn-info mb-3" title="Approve SO Creation"><i class="fa fa-check"></i></a>
+                                    <a href="/ForDisapproveSO/{{ $SONumber}}" class="btn btn-rounded btn-info mb-3" title="Disapprove SO Creation"><i class="fa fa-close"></i></a>
+                                    @endif
+                                </div>
 
                             </span>
                             <div class="form-group">
