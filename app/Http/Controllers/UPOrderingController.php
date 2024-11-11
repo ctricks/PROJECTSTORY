@@ -103,6 +103,37 @@ class UPOrderingController extends Controller
         return view('Ordering.SOApproval',compact('data','branch','supplier','DataType'));
     }
 
+    public function SOConsolidated()
+    {
+        $ascending = 0; // Default to ascending order
+        $branchId =  0;//auth()->user()->branchid;
+       
+        $email = auth()->user()->email;
+        $SiteByUser = auth()->user()->branchid;
+
+        $branch = DB::select("CALL SP_GET_SITE_PER_EMAIL(?)", [$email]); 
+
+        if(count($branch) == 0)
+        {
+            $branch = DB::table('branch')
+            ->select('*')
+            ->where('id',[$SiteByUser])
+            ->get();             
+        }
+
+        $supplier = DB::table('vendormasterfile')
+        ->select('*')
+        //->where('Status',1)
+        ->get(); 
+
+        $data = DB::select("CALL SP_REP_CONSO_ORDERS(null)");
+        $DataType = 'Consolidated';        
+        $ColCount = count((array)$data[0]);
+        $fieldNames = array_keys((array)$data[0]);
+        
+        return view('Ordering.SOConsolidated',compact('data','branch','supplier','DataType','fieldNames','ColCount'));
+    }
+
 
     public function import(Request $request)
     {

@@ -71,6 +71,7 @@
                                     <li><a href="/uploadingSO">Store Order</a></li>
                                     <li><a href="/createSOWOS">Store Order (W/O SO)</a></li>
                                     <li><a href="/SOApproval">Approval</a></li>
+                                    <li><a href="/SOConsolidated">Consolidated SO</a></li>
                                     {{-- <li><a href="/SOApproved">Approved List</a></li> --}}
                                    <!-- <li><a href="/createSODS">DROPSHIPPING</a></li>  -->
                                 </ul>
@@ -273,6 +274,24 @@ let so_dTable = new DataTable('#so_dTable',
         } }
     ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ]          
 });
+
+let soCon_dTable = new DataTable('#soCon_dTable', 
+    {
+    columns: [
+        { mDataProp: 'SODate' },
+        { mDataProp: 'CATEGORY' },
+        { mDataProp: 'CLASSIFICATION' },
+        { mDataProp: 'ItemCode' },
+        { mDataProp: 'ItemName' },
+        { mDataProp: 'Packaging' },
+        { mDataProp: 'UNIT' },        
+        { mDataProp: '1' },
+        { mDataProp: '2' },
+        { mDataProp: '3' },          
+        { mDataProp: 'TOTAL' },          
+    ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ]          
+});
+
 
 let soApp_dTable = new DataTable('#soApp_dTable', 
     {

@@ -138,6 +138,8 @@ Route::get('/ForDisapproveSO/{SONumber}', [OrderingController::class, 'Disapprov
 //APPROVED(SO)
 Route::get('/SOApproved',[UPOrderingController::class,'SOApproved']);
 
+//CONSOLIDATED(SO)
+Route::get('/SOConsolidated',[UPOrderingController::class,'SOConsolidated']);
 
 //APPROVAL (RECEIVING)
 Route::get('approvalSO',[RecApprovalController::class,'index']);
