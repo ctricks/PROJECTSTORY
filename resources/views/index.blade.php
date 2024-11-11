@@ -117,8 +117,8 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i><span>Inventory</span></a>
                                 <ul class="collapse">
                                     <li><a href="/status-details">Status/Details</a></li>
-                                    <li><a href="/">Item List (w/ Cost)</a></li>
-                                    <li><a href="/">Item List (w/o Cost)</a></li>
+                                    <li><a href="/ItemListC">Item List (w/ Cost)</a></li>
+                                    <li><a href="/ItemList">Item List (w/o Cost)</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -292,6 +292,24 @@ let soCon_dTable = new DataTable('#soCon_dTable',
     ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ]          
 });
 
+let itemCost_dTable = new DataTable('#itemCost_dTable', 
+    {
+    columns: [
+        { mDataProp: 'ItemCode' },
+        { mDataProp: 'ItemName' },
+        { mDataProp: 'UNIT' },
+        { mDataProp: 'COST' },            
+    ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ]          
+});
+
+let itemCostOnly_dTable = new DataTable('#itemCostOnly_dTable', 
+    {
+    columns: [
+        { mDataProp: 'ItemCode' },
+        { mDataProp: 'ItemName' },
+        { mDataProp: 'UNIT' },        
+    ],columnDefs: [ { "defaultContent": "-", "targets": "_all" } ]          
+});
 
 let soApp_dTable = new DataTable('#soApp_dTable', 
     {

@@ -59,6 +59,10 @@ Route::POST('/get-upload-sonumber', [RecUploadController::class, 'showDetails'])
 //INVENTORY
 Route::get('status-details',[InventoryController::class,'index']);
 Route::get('/get-itemcodeInv/{id}', [InventoryController::class, 'show']);
+Route::get('/ItemListC',[InventoryController::class,'ItemListC']);
+Route::get('/ItemList',[InventoryController::class,'ItemList']);
+
+
 
 //REFERENCE
 Route::get('/category/{id}', [ReferenceController::class, 'category']);

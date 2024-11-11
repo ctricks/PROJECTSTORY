@@ -85,6 +85,24 @@ class InventoryController extends Controller
         
     }
 
+    public function ItemListC()
+    {
+        $iteminventory = DB::select("CALL SP_GET_ITEM_LIST(1)"); 
+        
+
+        return view('Inventory.ItemListCost',compact('iteminventory'));
+    }
+
+    public function ItemList()
+    {
+        $iteminventory = DB::select("CALL SP_GET_ITEM_LIST(1)"); 
+        
+
+        return view('Inventory.ItemList',compact('iteminventory'));
+    }
+
+
+
     /**
      * Show the form for editing the specified resource.
      *
