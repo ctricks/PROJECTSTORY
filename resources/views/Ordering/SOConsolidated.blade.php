@@ -139,8 +139,7 @@
                                                                                                                                                                                                 
                                                 @for ($columnCount = 7 ; $columnCount < (int)$ColCount;$columnCount++)
                                                     <th scope="col">{{ $fieldNames[$columnCount]; }}</th>    
-                                                @endfor
-                                                <th scope="col">TOTAL</th>                                                                                                                                                                                                         
+                                                @endfor                                                
                                             </tr>
                                         </thead>
                                         <tbody>                                                                                        
@@ -156,6 +155,7 @@
                                                 <td>{{ $detail->NNABA }}</td>
                                                 <td>{{ $detail->NNFIL }}</td>
                                                 <td>{{ $detail->NNVIA }}</td>                                                
+                                                <td>{{ $detail->TOTAL }}</td>                                                
                                                 </tr>
                                                 @empty
                                                 <tr>

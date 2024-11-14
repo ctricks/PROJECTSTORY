@@ -69,7 +69,7 @@
                                 <ul class="collapse">
                                     <!-- <li><a href="/createSO">Store Order</a></li> -->
                                     <li><a href="/uploadingSO">Store Order</a></li>
-                                    <li><a href="/createSOWOS">Store Order (W/O SO)</a></li>
+                                    {{-- <li><a href="/createSOWOS">Store Order (W/O SO)</a></li> --}}
                                     <li><a href="/SOApproval">Approval</a></li>
                                     <li><a href="/SOConsolidated">Consolidated SO</a></li>
                                     {{-- <li><a href="/SOApproved">Approved List</a></li> --}}
@@ -84,7 +84,7 @@
                                 <ul class="collapse">
                                 @if(auth()->user()->role == 'recEncoder') 
                                     <li><a href="/createREC">Receive</a></li>
-                                    <li><a href="/createRECNOSO">Receive (WO SO)</a></li>
+                                    {{-- <li><a href="/createRECNOSO">Receive (WO SO)</a></li> --}}
                                     <!-- <li><a href="/uploadSO">SO Upload</a></li> -->
                                     <li><a href="/uploadREC">Upload</a></li>
                                 @endif
@@ -95,7 +95,7 @@
                                 @if(auth()->user()->role == 'Admin') 
                                 <li><a href="/createREC">Receive</a></li>
                                 <!-- <li><a href="/addActualREC">New UI</a></li> -->
-                                    <li><a href="/createRECNOSO">Receive (WO SO)</a></li>
+                                {{-- <li><a href="/createRECNOSO">Receive (WO SO)</a></li> --}}
                                     <li><a href="/uploadSO">Upload</a></li>
                                     <li><a href="/approvalSO">Approval</a></li>
                                     <li><a href="/approvedSO">Approved List</a></li>

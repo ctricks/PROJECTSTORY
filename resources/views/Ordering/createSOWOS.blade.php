@@ -39,6 +39,18 @@
 										    @csrf	
                                             <div class="modal-body">
                                                 <div class="form-group row">
+                                                    <label class="col-4 col-form-label">Vendor</label>
+                                                    <div class="col-8">
+                                                        <select class="js-example-basic-supplier form-control-sm input-rounded responsive col-md-12 wider-select" id="SupplierId" name="SupplierId">
+                                                            @forelse ($supplier as $suppliers)
+                                                            <option value="{{ $suppliers->id }}">{{ $suppliers->Name }}</option>
+                                                            @empty
+                                                            <option>No data found.</option>
+                                                            @endforelse 
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
                                                     <label class="col-4 col-form-label">Store</label>
                                                     <div class="col-8">
                                                         
@@ -51,19 +63,7 @@
                                                             @endforelse
                                                          </select>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-4 col-form-label">Vendor</label>
-                                                    <div class="col-8">
-                                                        <select class="js-example-basic-supplier form-control-sm input-rounded responsive col-md-12 wider-select" id="SupplierId" name="SupplierId">
-                                                            @forelse ($supplier as $suppliers)
-                                                            <option value="{{ $suppliers->id }}">{{ $suppliers->Name }}</option>
-                                                            @empty
-                                                            <option>No data found.</option>
-                                                            @endforelse 
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                </div>                                                
                                                 {{-- <div class="form-group row">
                                                     <label for="totItem-input" class="col-4 col-form-label">Excel Template</label>
                                                     <div class="col-8">                                                        
