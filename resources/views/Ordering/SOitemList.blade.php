@@ -133,7 +133,7 @@
                                     <input type="hidden" value="{{ $SONumber }}" name="SONumber">
                                     <input type="hidden"  id="ItemCodeH" name="ItemCodeH">
                                     <div class="form-group">
-                                        <label class="col-form-label">Item</label>
+                                        <label class="col-form-label">Item</label></br>
                                             <!-- <select class="js-example-basic-singleA form-control-sm input-rounded responsive col-md-12"  id="product-selectA" name="InventoryItem" > -->
                                             <select class="js-example-basic-singleA form-control-sm input-rounded responsive col-md-12" id="product-selectA" name="InventoryItem" {{ $SOHeader[0]->STATUS == "RECEIVED" ? 'disabled' : '' }}>
                                                 <option value="">Select Item</option>
@@ -153,6 +153,13 @@
                                         <label for="UOM">UOM</label>
                                         <input type="text" class="form-control form-control-sm input-rounded" id="UOM" name="UOM" disabled>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="Cost">COST</label>
+                                        <input type="text" class="form-control form-control-sm input-rounded" id="COST" name="COST" disabled>
+                                    </div>
+
+                                    <input type="hidden"  id="COST" name="COST" hidden>
                                    
                                     <div class="form-group">
                                         <label for="REC_QTY">Item Quantity</label>
@@ -211,6 +218,12 @@
                                                                 <input type="text" class="form-control form-control-sm input-rounded" id="ItemCodeE" name="ItemCodeE" disabled>
                                                             </div> -->
                                                             <div class="form-group row">
+                                                                <label for="UOM" class="col-4 col-form-label">Cost</label>
+                                                                <div class="col-8">
+                                                                    <input type="text" class="form-control form-control-sm input-rounded" id="SOHCost" name="SOHCost" disabled>
+                                                                </div>  
+                                                            </div>  
+                                                            <div class="form-group row">
                                                                 <label for="UOM" class="col-4 col-form-label">UOM</label>
                                                                 <div class="col-8">
                                                                     <input type="text" class="form-control form-control-sm input-rounded" id="SOHUOM_Desc" name="SOHUOM_Desc" disabled>
@@ -250,7 +263,9 @@
                                                 <th scope="col">Description</th>
                                                 <th scope="col">Item Code</th>
                                                 <th scope="col">UOM</th>
+                                                <th scope="col">COST</th>
                                                 <th scope="col">QTY</th>
+                                                <th scope="col">Total Cost</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
@@ -260,10 +275,12 @@
                                                 <td>{{ $detail->InventoryName }}</td>
                                                 <td>{{ $detail->ItemCode }}</td>
                                                 <td>{{ $detail->UOM_Desc }}</td>
-                                                <td>{{ $detail->PO_QTY }}</td>
+                                                <td>{{ $detail->Cost }}</td>
+                                                <td>{{ $detail->PO_QTY }}</td>                                                
+                                                <td>{{ number_format(((float)($detail->PO_QTY * $detail->Cost)), 2, '.', '')  }}</td>
                                                 <td>  
                                                     @if($SOHeader[0]->STATUS == "PENDING")
-                                                    <button type="button" class="btn btn-rounded btn-info mb-3 ediHeaderD-btn" id="btn-editSODetailsModal" data-id="{{ $detail->TransactionID }}" data-id2="{{ $detail->InventoryName }}" data-id3="{{ $detail->ItemCode }}" data-id4="{{ $detail->UOM_Desc }}" data-id5="{{ $detail->PO_QTY}}" data-toggle="modal" data-target="#editSODModal" title="Edit Details"><i class="fa fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-rounded btn-info mb-3 ediHeaderD-btn" id="btn-editSODetailsModal" data-id="{{ $detail->TransactionID }}" data-id2="{{ $detail->InventoryName }}" data-id3="{{ $detail->ItemCode }}" data-id4="{{ $detail->UOM_Desc }}" data-id5="{{ $detail->PO_QTY}}" data-id6="{{ $detail->Cost}}" data-toggle="modal" data-target="#editSODModal" title="Edit Details"><i class="fa fa-edit"></i></button>
                                                     <button type="button" class="btn btn-rounded btn-info mb-3" id="btn-delSODetails" data-id="{{ $detail->TransactionID }}" data-id2="{{ $detail->InventoryName }}" data-id3 ="{{ $SOHeader[0]->SONumber }}" title ="Delete"><i class="fa fa-ban" ></i></button>
                                                     @endif
 

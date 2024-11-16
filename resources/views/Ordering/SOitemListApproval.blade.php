@@ -6,7 +6,7 @@
                     <div class="row align-items-center">
                         <div class="col-sm-6">
                             <div class="breadcrumbs-area clearfix">
-                                <h4 class="page-title pull-left">Item List</h4>
+                                <h4 class="page-title pull-left">SO Approval Item List</h4>
                                 <ul class="breadcrumbs pull-left">
                                     <li><a href="/uploadingSO">Ordering</a></li>
                                 </ul>
@@ -160,6 +160,13 @@
                                         <label for="UOM">UOM</label>
                                         <input type="text" class="form-control form-control-sm input-rounded" id="UOM" name="UOM" disabled>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="COST">COST</label>
+                                        <input type="text" class="form-control form-control-sm input-rounded" id="COST" name="COST" disabled>
+                                        <input type="hidden" class="form-control form-control-sm input-rounded" id="CostH" name="CostH" hidden>
+                                    </div>
+
                                    
                                     <div class="form-group">
                                         <label for="REC_QTY">Item Quantity</label>
@@ -224,6 +231,12 @@
                                                                 </div>  
                                                             </div>  
                                                             <div class="form-group row">
+                                                                <label for="UOM" class="col-4 col-form-label">COST</label>
+                                                                <div class="col-8">
+                                                                    <input type="text" class="form-control form-control-sm input-rounded" id="SOHCost" name="SOHCost" disabled>
+                                                                </div>  
+                                                            </div>  
+                                                            <div class="form-group row">
                                                                 <label for="REC_QTY" class="col-4 col-form-label">Total Quantity</label>
                                                                 <div class="col-8">
                                                                  <input type="number" class="form-control form-control-sm input-rounded" id="SOHPO_QTY" name="SOHPO_QTY">
@@ -258,6 +271,8 @@
                                                 <th scope="col">Item Code</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">QTY</th>
+                                                <th scope="col">COST</th>
+                                                <th scope="col">TOTAL COST</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
@@ -268,9 +283,11 @@
                                                 <td>{{ $detail->ItemCode }}</td>
                                                 <td>{{ $detail->UOM_Desc }}</td>
                                                 <td>{{ $detail->PO_QTY }}</td>
+                                                <td>{{ $detail->Cost }}</td>
+                                                <td>{{ number_format(((float)($detail->PO_QTY * $detail->Cost)), 2, '.', '')  }}</td>
                                                 <td>  
                                                     @if($SOHeader[0]->STATUS == "PENDING")
-                                                    <button type="button" class="btn btn-rounded btn-info mb-3 ediHeaderD-btn" id="btn-editSODetailsModal" data-id="{{ $detail->TransactionID }}" data-id2="{{ $detail->InventoryName }}" data-id3="{{ $detail->ItemCode }}" data-id4="{{ $detail->UOM_Desc }}" data-id5="{{ $detail->PO_QTY}}" data-toggle="modal" data-target="#editSODModal" title="Edit Details"><i class="fa fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-rounded btn-info mb-3 ediHeaderD-btn" id="btn-editSODetailsModal" data-id="{{ $detail->TransactionID }}" data-id2="{{ $detail->InventoryName }}" data-id3="{{ $detail->ItemCode }}" data-id4="{{ $detail->UOM_Desc }}" data-id5="{{ $detail->PO_QTY}}" data-id6="{{ $detail->Cost}}" data-toggle="modal" data-target="#editSODModal" title="Edit Details"><i class="fa fa-edit"></i></button>
                                                     <button type="button" class="btn btn-rounded btn-info mb-3" id="btn-delSODetails" data-id="{{ $detail->TransactionID }}" data-id2="{{ $detail->InventoryName }}" data-id3 ="{{ $SOHeader[0]->SONumber }}" title ="Delete"><i class="fa fa-ban" ></i></button>
                                                     @endif
 
@@ -318,6 +335,8 @@
                                                 <td>{{ $detail->ItemCode }}</td>
                                                 <td>{{ $detail->UOM_Desc }}</td>
                                                 <td>{{ $detail->PO_QTY }}</td>
+                                                <td>{{ $detail->Cost }}</td>
+                                                <td>{{ ($detail->PO_QTY * $detail->Cost) }}</td>
                                                 </tr>
                                                 @empty
                                                 <tr>

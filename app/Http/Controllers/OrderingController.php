@@ -449,10 +449,9 @@ class OrderingController extends Controller
     }
     public function showItem($id)
     {
-        $data = DB::table('productmasterfile')
-        ->select('*') 
-        ->where('ID',$id) 
-        ->first(); 
+        // $data = DB::table('productmasterfile')
+        $data = DB::select("CALL SP_GET_PRODUCTINFO_ByID(?)",[$id]);                
+
         if ($data) {
             return response()->json($data);
         } else {
@@ -472,21 +471,25 @@ class OrderingController extends Controller
 
         $data = $request->all();
        // Extract data from the validated request
+       
+
        $itemCodeH = $data['ItemCodeH'];
        $InventoryItem = $data['InventoryItem'];
         $PO_QTY = $data['PO_QTY'];
         $SONumber = $data['SONumber'];
+        $Cost = $data['CostH'];
         
         if (is_null($data['ItemCodeH']) || is_null($data['PO_QTY'])) {
             return redirect()->back()->with('error', 'Please fill in all required fields.');
         }
 
          // Call the stored procedure
-         $results = DB::select('CALL SP_INSERT_SO_ITEMSDETAILS(?, ?, ?, ?)', [
+         $results = DB::select('CALL SP_INSERT_SO_ITEMSDETAILS(?, ?, ?, ?, ?)', [
             $SONumber,
             $itemCodeH,
+            $Cost,
             $PO_QTY,
-           1,
+            auth()->user()->id,
         ]);
         //dd($results);
 

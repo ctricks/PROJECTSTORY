@@ -337,7 +337,9 @@ let dataTable_SOdetails = new DataTable('#dataTable_SOdetails',
         { mDataProp : 'InventoryName' },
         { mDataProp : 'ItemCode' },
         { mDataProp : 'UOM_Desc' },
+        { mDataProp : 'Cost' },
         { mDataProp : 'PO_QTY' },
+        { mDataProp : 'TotalCost' },
         { mDataProp : 'Action' }
         //{ data: null, render: function(data, type, row) {
         //    return '<button type="button" class="btn btn-rounded btn-info mb-3 edit-button"  data-id="' + detail.id + '" data-id2="' + detail.InventoryName + '" data-id3="' + detail.ItemCode + '" data-id4="' + detail.UOM_Desc  + '" data-id5="' + detail.PO_QTY  + '"><i class="fa fa-edit"></i></button>';
@@ -438,11 +440,13 @@ let dataTable_Rec_Approved = new DataTable('#dataTable_Rec_Approved',
                 var rowItemCode = $(this).data('id3');
                 var rowUOM_Desc = $(this).data('id4');
                 var rowPO_QTY = $(this).data('id5');
+                var rowCost = $(this).data('id6');
                 $('#SOHId').val(rowId);
                 $('#SOHInventoryName').val(rowInventoryName);
                 $('#SOHItemCode').val(rowItemCode);
                 $('#SOHUOM_Desc').val(rowUOM_Desc);
                 $('#SOHPO_QTY').val(rowPO_QTY);
+                $('#SOHCost').val(rowCost);
             });
         });
     
@@ -535,7 +539,7 @@ let dataTable_Rec_Approved = new DataTable('#dataTable_Rec_Approved',
 
 </script>
 <script type="text/javascript">
-    const productSelectInv = document.getElementById('product-selectInvv');
+    const productSelectInv = document.getElementById('product-selectInv');
     const inventoryIdInputInv = document.getElementById('ItemCode');
     const ItemCodeHInputInv = document.getElementById('ItemCodeH');
     const UOMInputInv = document.getElementById('UOM');
@@ -638,11 +642,13 @@ let dataTable_Rec_Approved = new DataTable('#dataTable_Rec_Approved',
             var rowItemCode = $(this).data('id3');
             var rowUOM = $(this).data('id4');
             var rowTotalItem = $(this).data('id5');
+            var rowCost = $(this).data('id6');
             $('#IdE').val(rowId);
             $('#product-selectE').val(rowDescription);
             $('#ItemCodeE').val(rowItemCode);
             $('#ItemCodeHE').val(rowItemCode);
             $('#UOME').val(rowUOM);
+            $('#COST').val(rowCost);
             $('#PO_QTYE').val(rowTotalItem);
         });
 
@@ -719,9 +725,10 @@ $('#dataTable_SOdetails').on('click', '#btn-delSODetails', function() {
                     method: "GET",
                     dataType: "json",
                     success: function(data) {
-                        $("#ItemCode").val(data.InventoryID);
-                        $("#ItemCodeH").val(data.InventoryID);
-                        $("#UOM").val(data.Packaging);
+                        $("#ItemCode").val(data[0].InventoryID);
+                        $("#ItemCodeH").val(data[0].InventoryID);
+                        $("#UOM").val(data[0].Packaging);
+                        $("#Cost").val(data[0].Cost);
                         // Update other input fields as needed based on the data object
                     },
                     error: function(error) {
@@ -731,16 +738,19 @@ $('#dataTable_SOdetails').on('click', '#btn-delSODetails', function() {
             }); 
             
             $("#product-selectA").change(function() {
-                var selectedItem = $(this).val();  // Get the selected item ID
+                var selectedItem = $(this).val();  // Get the selected item ID                
                 // Make an AJAX request to fetch item details based on selected ID
                 $.ajax({
                     url: "/get-itemcode/" + selectedItem,  // Replace with your actual URL endpoint
                     method: "GET",
-                    dataType: "json",
+                    dataType: "json",                    
                     success: function(data) {
-                        $("#ItemCode").val(data.InventoryID);
-                        $("#ItemCodeH").val(data.InventoryID);
-                        $("#UOM").val(data.Packaging);
+                        console.log(data);
+                        $("#ItemCode").val(data[0].InventoryID);
+                        $("#ItemCodeH").val(data[0].InventoryID);
+                        $("#UOM").val(data[0].Packaging);
+                        $("#CostH").val(data[0].Cost);
+                        $("#COST").val(data[0].Cost);
                         // Update other input fields as needed based on the data object
                     },
                     error: function(error) {
@@ -757,9 +767,9 @@ $('#dataTable_SOdetails').on('click', '#btn-delSODetails', function() {
                     method: "GET",
                     dataType: "json",
                     success: function(data) {
-                        $("#SOHItemCode").val(data.InventoryID);
-                        $("#SOHInventoryName").val(data.InventoryName);
-                        $("#SOHUOM_Desc").val(data.Packaging);
+                        $("#SOHItemCode").val(data[0].InventoryID);
+                        $("#SOHInventoryName").val(data[0].InventoryName);
+                        $("#SOHUOM_Desc").val(data[0].Packaging);                        
                         // Update other input fields as needed based on the data object
                     },
                     error: function(error) {
