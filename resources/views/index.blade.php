@@ -138,6 +138,7 @@
                                     <li><a href="">Sub-Category Lists</a></li>
                                     <li><a href="">UOM Lists</a></li>
                                     <li><a href="">Store Lists</a></li>
+                                    <li><a href="">Product Bundle</a></li>
                                 </ul>
                             </li>
                             <li>
